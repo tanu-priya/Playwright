@@ -12,7 +12,10 @@ test("@smoke Create IM Notebook", async({page,request})=>{
     const notebookName = new dataUtil().IMNotebookName();
     const im = new InsightMinerPage(page);
     const api = new apiHelper(page, request);
-    await api.login(dynamicData.validCred[0].username, dynamicData.validCred[0].password);
+    //If using auth setup, comment below line and uncomment page.goto () and line in playwright.config.js for storage state
+    //await api.login(dynamicData.validCred[0].username, dynamicData.validCred[0].password);
+    await page.goto("/");
+    
     const dashboardPage = new DashboardPage(page,expect);
     //await dashboardPage.createIMNotebook(notebookName);
     //expect(page.locator('.nb-page-header').getByText(notebookName)).toBeTruthy(); 
