@@ -13,9 +13,9 @@ test("@smoke Create SE Notebook", async({page,request})=>{
     const api = new apiHelper(page, request);
     await api.login(dynamicData.validCred[0].username, dynamicData.validCred[0].password);
     const dashboardPage = new DashboardPage(page,expect);
-   // await dashboardPage.createSENotebook(notebookName);
-    //expect(page.locator('.nb-page-header').getByText(notebookName)).toBeTruthy(); 
-    dashboardPage.openSENotebook(0);
+    await dashboardPage.createSENotebook(notebookName);
+    expect(page.locator('.nb-page-header').getByText(notebookName)).toBeTruthy(); 
+    //await dashboardPage.openSENotebook(0);
     await se.inputContext("Big data analytics in healthcare") ;
     console.log(await se.sideNavResearchSetUp.isChecked()); // true/false
     await expect(se.sideNavResearchSetUp).toBeChecked();})
