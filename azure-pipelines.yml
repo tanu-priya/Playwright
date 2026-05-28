@@ -22,7 +22,7 @@ steps:
   displayName: Install Playwright Browsers
 
 - script: |
-    npx playwright test
+    npx playwright test --config=playwright.service.config.js --workers=9
   displayName: Run Playwright Tests
 
 - task: PublishPipelineArtifact@1
