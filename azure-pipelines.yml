@@ -20,3 +20,19 @@ steps:
 
 - script: |
     npm install
+    displayName: Install Dependencies
+
+- script: npx playwright install --with-deps
+  displayName: Install Playwright Browsers
+
+
+- script: npx playwright test
+  displayName: Run Playwright Tests
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: playwright-report
+    artifact: playwright-report
+  condition: succeededOrFailed()
+  displayName: Publish Playwright Report
+
