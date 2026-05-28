@@ -5,7 +5,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  TEST_ENV: 'stage'
+  TEST_ENV: 'dev'
 
 steps:
 
