@@ -30,8 +30,8 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-   // baseURL: envConfig.baseURL,
-   baseURL: 'https://notebook.dev.inferencecloud.ai/',
+    baseURL: envConfig.baseURL,
+   //baseURL: 'https://notebook.dev.inferencecloud.ai/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
