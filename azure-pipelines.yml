@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
   variables:
-  TEST_ENV: 'stage'
+  TEST_ENV: 'dev'
 
 steps:
 - task: NodeTool@0
@@ -20,5 +20,3 @@ steps:
 
 - script: |
     npm install
-    npm run build
-  displayName: 'npm install and build'
