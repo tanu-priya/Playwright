@@ -4,7 +4,7 @@ import dynamicData from '../utils/dynamicData.json';
 
 
 
-
+test.use({ storageState: { cookies: [], origins: [] } });
 test('open two context and login', async ({browser}) => {
    
     const context1 = await browser.newContext();

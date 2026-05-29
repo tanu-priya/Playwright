@@ -17,7 +17,7 @@ class DashboardPage {
     }
 
     async createIMNotebook(notebookName) {
-        await this.createNotebookButton.click();
+        await this.createIMNotebookButton.click();
         await this.inputNotebookName.fill(notebookName);
         await this.createButton.click();
     }

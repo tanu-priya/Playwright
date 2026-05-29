@@ -1,4 +1,5 @@
 import { DashboardPage } from '../pages/DashboardPage.js';
+import envConfig from '../config/envLoader.js';
 
 
 class apiHelper {
@@ -9,7 +10,7 @@ class apiHelper {
     }
 
     async login(email, password) {
-        const response = await this.request.post("https://api.dev.inferencecloud.ai/db/v0.3/login", {
+        const response = await this.request.post(envConfig.apiBaseURL + "db/v0.3/login", {
             data: { email, password }
         });
         const result = await response.json();

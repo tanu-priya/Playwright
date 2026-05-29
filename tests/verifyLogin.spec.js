@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage.js';
 import dynamicData from '../utils/dynamicData.json';
 
+test.use({ storageState: { cookies: [], origins: [] } });
 test.describe("Login Tests ", () => {
     test.describe.configure({ mode: 'parallel' });
     var loginPage;
