@@ -1,12 +1,12 @@
-const { defineConfig } = require('@playwright/test');
-const { createAzurePlaywrightConfig, ServiceOS } = require('@azure/playwright');
-const { DefaultAzureCredential } = require('@azure/identity');
-const config = require('./playwright.config');
+import { defineConfig } from '@playwright/test';
+import { createAzurePlaywrightConfig, ServiceOS } from '@azure/playwright';
+import { DefaultAzureCredential } from '@azure/identity';
+import baseConfig from './playwright.config.js';
 
 /* Learn more about service configuration at https://aka.ms/pww/docs/config */
 export default defineConfig(
-  config,
-  createAzurePlaywrightConfig(config, {
+  baseConfig,
+  createAzurePlaywrightConfig(baseConfig, {
     exposeNetwork: '<loopback>',
     connectTimeout: 3 * 60 * 1000, // 3 minutes
     os: ServiceOS.LINUX,
@@ -22,8 +22,8 @@ export default defineConfig(
     If you're already using other reporters, add them to this array.
     */
     reporter: [
-      ["html", { open: "never" }],
-      ["@azure/playwright/reporter"],
-     ],
-  }
+      ['html', { open: 'never' }],
+      ['@azure/playwright/reporter'],
+    ],
+  },
 );
