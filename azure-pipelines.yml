@@ -1,38 +1,76 @@
-trigger:
-- main
-
-pool:
-  vmImage: ubuntu-latest
-
-variables:
-  TEST_ENV: 'dev'
-  # Define secret variables TEST_USER and TEST_PASSWORD in Azure DevOps:
-  # Pipelines > Edit > Variables > New variable (check "Keep this value secret")
-
-steps:
-
-- task: UseNode@1
-  inputs:
-    version: '18.x'
-  displayName: Install Node.js
-
-- script: npm ci
-  displayName: Install Dependencies
-
-- script: |
-    npx playwright install --with-deps
-  displayName: Install Playwright Browsers
-
-- script: |
-    npx playwright test
-  displayName: Run Playwright Tests
-  env:
-    TEST_USER: $(TEST_USER)
-    TEST_PASSWORD: $(TEST_PASSWORD)
-
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: playwright-report
-    artifact: playwright-report
-  condition: always()
-  displayName: Publish Playwright Report
+trigger:
+
+- main
+
+
+
+pool:
+
+  vmImage: ubuntu-latest
+
+
+
+variables:
+
+  TEST_ENV: 'dev'
+
+  # Define secret variables TEST_USER and TEST_PASSWORD in Azure DevOps:
+
+  # Pipelines > Edit > Variables > New variable (check "Keep this value secret")
+
+
+
+steps:
+
+
+
+- task: UseNode@1
+
+  inputs:
+
+    version: '18.x'
+
+  displayName: Install Node.js
+
+
+
+- script: npm ci
+
+  displayName: Install Dependencies
+
+
+
+- script: |
+
+    npx playwright install --with-deps
+
+  displayName: Install Playwright Browsers
+
+
+
+- script: |
+
+    npx playwright test
+
+  displayName: Run Playwright Tests
+
+  env:
+
+    TEST_USER: $(TEST_USER)
+
+    TEST_PASSWORD: $(TEST_PASSWORD)
+
+
+
+- task: PublishPipelineArtifact@1
+
+  inputs:
+
+    targetPath: playwright-report
+
+    artifact: playwright-report
+
+  condition: always()
+
+  displayName: Publish Playwright Report
+
