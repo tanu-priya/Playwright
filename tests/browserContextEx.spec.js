@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage.js';
-import dynamicData from '../utils/dynamicData.json';
+import { getValidCredentials } from '../utils/credentials.js';
 
 
 
 test.use({ storageState: { cookies: [], origins: [] } });
 test('open two context and login', async ({browser}) => {
+    const [credentials] = getValidCredentials();
    
     const context1 = await browser.newContext();
     const context2 = await browser.newContext();
@@ -15,7 +16,7 @@ test('open two context and login', async ({browser}) => {
     const  loginPage1 = new LoginPage(page1);
     await page1.goto('/');
 
-    const dashboardPage = await loginPage1.login(dynamicData.validCred[0].username, dynamicData.validCred[0].password);
+    const dashboardPage = await loginPage1.login(credentials.username, credentials.password);
     await dashboardPage.finishButtonClick();
     expect(await dashboardPage.yourWorkHeader.isVisible()).toBeTruthy();
     const  loginPage2 = new LoginPage(page2);

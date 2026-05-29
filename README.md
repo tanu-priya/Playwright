@@ -359,22 +359,48 @@ Contains page objects and methods for Strategy Explorer functionality.
 
 ## Test Data
 
-Test data is managed in `utils/dynamicData.json` and includes:
-- Valid user credentials for login tests
+Test data is managed in `utils/dynamicData.json` for non-sensitive scenarios only:
 - Invalid credentials for negative test cases
-- Any other test-specific data
+- Any other non-sensitive test fixtures
+
+Valid login credentials must come from environment variables:
+- `TEST_USER`
+- `TEST_PASSWORD`
+- Optional multi-user input: `TEST_USERS_JSON` (JSON array of `{ "username", "password" }`)
 
 ---
 
 ## CI/CD Integration
 
-When running in a CI/CD pipeline, set the `CI` environment variable:
+### Required secrets
 
-```bash
-CI=true TEST_ENV=prod npx playwright test
-```
+Auth setup and login tests need these environment variables in CI:
 
-This will:
+| Variable | Description |
+|----------|-------------|
+| `TEST_USER` | Valid login email |
+| `TEST_PASSWORD` | Valid login password |
+| `TEST_ENV` | Optional; defaults to `dev` in pipelines |
+
+### GitHub Actions
+
+1. Open the repo on GitHub → **Settings** → **Secrets and variables** → **Actions**.
+2. Add repository secrets:
+   - `TEST_USER`
+   - `TEST_PASSWORD`
+3. The workflow `.github/workflows/playwright.yml` passes them into the test job automatically.
+
+### Azure Pipelines
+
+1. Open your pipeline in Azure DevOps → **Edit** → **Variables**.
+2. Add variables (enable **Keep this value secret** for each):
+   - `TEST_USER`
+   - `TEST_PASSWORD`
+3. `azure-pipelines.yml` maps them into the **Run Playwright Tests** step via `env`.
+
+### CI behavior
+
+GitHub Actions and Azure Pipelines set `CI=true` automatically. That will:
 - Reduce number of workers to 1
 - Increase retries to 2
 - Enforce `forbidOnly` (fail if test.only is found)
@@ -388,7 +414,7 @@ This will:
 - Check if the application is responding
 
 ### Authentication failures
-- Verify test data in `utils/dynamicData.json`
+- Verify `TEST_USER` and `TEST_PASSWORD` (or `TEST_USERS_JSON`) are set
 - Check if credentials are valid in the target environment
 - Delete the corresponding auth JSON file to force re-authentication
 

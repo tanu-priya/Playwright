@@ -1,18 +1,8 @@
 {
-    "validCred": [
-        {
-            "username": "test26@mailinator.com",
-            "password": "11111111@Pp"
-        },
-        {
-            "username": "test27@mailinator.com",
-            "password": "11111111@Pp"   
-        }
-    ],
-"invalidCred" : [
-        {
-            "invalidUsername": "test26@gmail.com",
-            "invalidPassword": "invalidPass"
-        }
-    ]
+  "invalidCred": [
+    {
+      "invalidUsername": "test26@gmail.com",
+      "invalidPassword": "invalidPass"
+    }
+  ]
 }
